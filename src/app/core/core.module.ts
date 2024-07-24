@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { CoreRoutingModule } from './core-routing.module';
-import { CoreComponent } from './core.component';
+import {CoreRoutingModule} from './core-routing.module';
+import {CoreComponent} from './core.component';
 import {RouterOutlet} from "@angular/router";
 
 @NgModule({
@@ -15,4 +15,5 @@ import {RouterOutlet} from "@angular/router";
     RouterOutlet,
   ]
 })
-export class CoreModule { }
+export class CoreModule {
+}
