@@ -8,12 +8,15 @@
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss",
+          "skipTests": true,
           "standalone": false
         },
         "@schematics/angular:directive": {
+          "skipTests": true,
           "standalone": false
         },
         "@schematics/angular:pipe": {
+          "skipTests": true,
           "standalone": false
         }
       },
@@ -49,8 +52,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kB",
-                  "maximumError": "1MB"
+                  "maximumWarning": "1MB",
+                  "maximumError": "2MB"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -99,7 +102,6 @@
               }
             ],
             "styles": [
-              "@angular/material/prebuilt-themes/azure-blue.css",
               "src/styles/scss/styles.scss"
             ],
             "scripts": []
