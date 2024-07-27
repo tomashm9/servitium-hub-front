@@ -6,13 +6,10 @@
 
 .toolbar {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
 .toolbar-section {
   display: flex;
-  align-items: center;
 }
 
 .toolbar-section.left {
@@ -21,12 +18,10 @@
 
 .toolbar-section.center {
   flex: 2;
-  justify-content: center;
 }
 
 .toolbar-section.right {
   flex: 1;
-  justify-content: flex-end;
 }
 
 .menu-list {

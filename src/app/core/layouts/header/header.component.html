@@ -1,14 +1,14 @@
 <header class="wrapper row">
   <div class="wrapper row pad-r-40 pad-l-40">
-    <mat-toolbar class="toolbar">
-      <div class="toolbar-section left">
+    <mat-toolbar class="toolbar space-between align-center">
+      <div class="toolbar-section left align-center">
         <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
           <mat-icon>menu</mat-icon>
         </button>
         <a id="menuTitle" [routerLink]="logoItem.home.url">{{ logoItem.home.label }}</a>
       </div>
 
-      <div class="toolbar-section center">
+      <div class="toolbar-section center justify-center">
         <ul class="menu-list">
           <li *ngFor="let item of centerMenuItems">
             <a mat-button [routerLink]="item.routerLink" (click)="item.routerLink === '' && scrollTo('hero')">{{ item.label }}</a>
@@ -16,7 +16,7 @@
         </ul>
       </div>
 
-      <div class="toolbar-section right">
+      <div class="toolbar-section right justify-end">
         <a *ngFor="let item of rightMenuItems">
           <a mat-button [routerLink]="item.routerLink">{{ item.label }}</a>
         </a>
