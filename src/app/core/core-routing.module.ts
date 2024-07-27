@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CoreComponent } from './core.component';
-import { HomeComponent } from './components/home/home.component';
 
 const routes: Routes = [
   {
@@ -10,7 +9,8 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: HomeComponent,
+        loadChildren: () =>
+          import('../features/home/home.module').then((m) => m.HomeModule),
       },
     ],
   },

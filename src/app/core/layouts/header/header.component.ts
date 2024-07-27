@@ -1,5 +1,4 @@
-import { Component, computed } from '@angular/core';
-import { ESSENTIAL_ROUTES } from '../../constants/routes';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -7,30 +6,46 @@ import { ESSENTIAL_ROUTES } from '../../constants/routes';
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
-  protected readonly ESSENTIAL_ROUTES = ESSENTIAL_ROUTES;
+  logoItem = {
+    home: {
+      url: '/',
+      label: 'Servitium Hub',
+    },
+  };
 
-  menuItems = computed(() => {
-    return [
-      {
-        label: 'Home',
-        routerLink: '',
-      },
-      {
-        label: 'About Us',
-        routerLink: '/about',
-      },
-      {
-        label: 'Services',
-        routerLink: '/services',
-      },
-      {
-        label: 'Log In',
-        routerLink: 'auth/login',
-      },
-      {
-        label: 'Sing Up',
-        routerLink: 'auth/signup',
-      },
-    ];
-  });
+  centerMenuItems = [
+    {
+      label: 'Home',
+      routerLink: '',
+      scrollTo: 'hero',
+    },
+    {
+      label: 'About Us',
+      routerLink: '',
+      scrollTo: 'about-us',
+    },
+    {
+      label: 'Services',
+      routerLink: '',
+      scrollTo: 'services',
+    },
+  ];
+
+  rightMenuItems = [
+    {
+      label: 'Log In',
+      routerLink: 'auth/login',
+    },
+    {
+      label: 'Sign Up',
+      routerLink: 'auth/signup',
+    },
+  ];
+
+  scrollTo(anchor: string): void {
+    const element = document.getElementById(anchor);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
 }
