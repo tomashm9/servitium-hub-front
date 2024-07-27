@@ -1,0 +1,32 @@
+<header class="wrapper row">
+  <div class="wrapper row pad-r-40 pad-l-40">
+    <mat-toolbar class="toolbar">
+      <div class="toolbar-section left">
+        <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <a id="menuTitle" [routerLink]="ESSENTIAL_ROUTES.home.url">{{ ESSENTIAL_ROUTES.home.label }}</a>
+      </div>
+
+      <div class="toolbar-section center">
+        <ul class="menu-list">
+          <li>
+            <a mat-button href="#hero">Home</a>
+          </li>
+          <li>
+            <a mat-button href="#about-us">About Us</a>
+          </li>
+          <li>
+            <a mat-button href="#services">Services</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="toolbar-section right">
+        <a *ngFor="let item of menuItems().slice(3)">
+          <a mat-button [routerLink]="item.routerLink">{{ item.label }}</a>
+        </a>
+      </div>
+    </mat-toolbar>
+  </div>
+</header>
