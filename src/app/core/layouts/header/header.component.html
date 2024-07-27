@@ -5,25 +5,19 @@
         <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
           <mat-icon>menu</mat-icon>
         </button>
-        <a id="menuTitle" [routerLink]="ESSENTIAL_ROUTES.home.url">{{ ESSENTIAL_ROUTES.home.label }}</a>
+        <a id="menuTitle" [routerLink]="logoItem.home.url">{{ logoItem.home.label }}</a>
       </div>
 
       <div class="toolbar-section center">
         <ul class="menu-list">
-          <li>
-            <a mat-button href="#hero">Home</a>
-          </li>
-          <li>
-            <a mat-button href="#about-us">About Us</a>
-          </li>
-          <li>
-            <a mat-button href="#services">Services</a>
+          <li *ngFor="let item of centerMenuItems">
+            <a mat-button [routerLink]="item.routerLink" (click)="item.routerLink === '' && scrollTo('hero')">{{ item.label }}</a>
           </li>
         </ul>
       </div>
 
       <div class="toolbar-section right">
-        <a *ngFor="let item of menuItems().slice(3)">
+        <a *ngFor="let item of rightMenuItems">
           <a mat-button [routerLink]="item.routerLink">{{ item.label }}</a>
         </a>
       </div>
