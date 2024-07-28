@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { HomeRoutingModule } from './home-routing.module';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../../shared/shared.module';
@@ -23,6 +23,7 @@ import { MatButton } from '@angular/material/button';
     FormsModule,
     MatButton,
     SharedModule,
+    NgOptimizedImage,
   ],
 })
 export class HomeModule {}
