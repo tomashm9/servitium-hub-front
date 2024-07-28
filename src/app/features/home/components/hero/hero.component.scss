@@ -1,0 +1,19 @@
+.hero-container {
+  display: flex;
+  position: relative;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+
+  .search-bar-container {
+    position: absolute;
+    top: 104px;
+    min-width: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
+  }
+}

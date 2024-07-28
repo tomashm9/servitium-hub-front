@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -16,18 +17,15 @@ export class HeaderComponent {
   centerMenuItems = [
     {
       label: 'Home',
-      routerLink: '',
-      scrollTo: 'hero',
+      routerLink: 'hero',
     },
     {
       label: 'About Us',
-      routerLink: '',
-      scrollTo: 'about-us',
+      routerLink: 'about-us',
     },
     {
       label: 'Services',
-      routerLink: '',
-      scrollTo: 'services',
+      routerLink: 'services',
     },
   ];
 
@@ -42,10 +40,19 @@ export class HeaderComponent {
     },
   ];
 
-  scrollTo(anchor: string): void {
-    const element = document.getElementById(anchor);
+  constructor(private router: Router) {}
+
+  scrollTo(section: string): void {
+    const element = document.getElementById(section);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      this.router.navigate(['/']).then(() => {
+        const newElement = document.getElementById(section);
+        if (newElement) {
+          newElement.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
     }
   }
 }

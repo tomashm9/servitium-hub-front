@@ -1,0 +1,9 @@
+<form (ngSubmit)="onSearch()">
+  <input
+    type="text"
+    [(ngModel)]="searchQuery"
+    placeholder="Enter Country, City, or Postal Code"
+    name="searchQuery"
+  />
+  <button mat-button type="submit">Search</button>
+</form>
