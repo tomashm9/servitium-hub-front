@@ -8,7 +8,11 @@ import { HeroComponent } from './components/hero/hero.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { ServicesComponent } from './components/services/services.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
-import { MatButton } from '@angular/material/button';
+
+// Angular material
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -21,9 +25,11 @@ import { MatButton } from '@angular/material/button';
     CommonModule,
     HomeRoutingModule,
     FormsModule,
-    MatButton,
     SharedModule,
     NgOptimizedImage,
+    MatCardModule,
+    MatIconModule,
+    MatButtonModule,
   ],
 })
 export class HomeModule {}
