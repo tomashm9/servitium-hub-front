@@ -1,0 +1,91 @@
+.about-us-container {
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+.about-us-content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.about-us-text {
+  flex: 1;
+  padding: 20px;
+  max-width: 50%;
+  box-sizing: border-box;
+}
+
+.about-us-text h1 {
+  font-size: 2.5em;
+  margin-bottom: 20px;
+}
+
+.about-us-text h2 {
+  font-size: 1.5em;
+  line-height: 2;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.about-us-text p {
+  font-size: 1em;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.about-us-image {
+  display: flex;
+  flex: 1;
+  max-width: 50%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.about-us-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 1200px) {
+  .about-us-content {
+    padding: 0 10px;
+  }
+
+  .about-us-text,
+  .about-us-image {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-us-content {
+    flex-direction: column;
+  }
+
+  .about-us-text,
+  .about-us-image {
+    max-width: 100%;
+  }
+
+  .about-us-image {
+    order: -1; /* Move the image to the top */
+  }
+
+  .about-us-text h1 {
+    font-size: 2em;
+  }
+
+  .about-us-text h2 {
+    font-size: 1.2em;
+  }
+
+  .about-us-text p {
+    font-size: 0.9em;
+  }
+}
