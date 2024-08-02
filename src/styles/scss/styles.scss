@@ -172,3 +172,13 @@ footer {
   pointer-events: none;
   opacity: 0.5;
 }
+
+.success {
+  background-color: #4caf50 !important;
+  color: #fff !important;
+}
+
+.error {
+  background-color: #f44336 !important;
+  color: #fff !important;
+}
