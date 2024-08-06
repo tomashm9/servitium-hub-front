@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CoreComponent } from './core.component';
+import { OwnerGuard } from './guards/owner.guard';
+import { ManagerGuard } from './guards/manager.guard';
 
 const routes: Routes = [
   {
@@ -18,11 +20,27 @@ const routes: Routes = [
           import('../features/auth/auth.module').then((m) => m.AuthModule),
       },
       {
-        path: 'dashboard',
+        path: 'client-dashboard',
         loadChildren: () =>
-          import('../features/dashboard/dashboard.module').then(
-            (m) => m.DashboardModule,
-          ),
+          import(
+            '../features/dashboard/client-dashboard/client-dashboard.module'
+          ).then((m) => m.ClientDashboardModule),
+      },
+      {
+        path: 'owner-dashboard',
+        loadChildren: () =>
+          import(
+            '../features/dashboard/owner-dashboard/owner-dashboard.module'
+          ).then((m) => m.OwnerDashboardModule),
+        canActivate: [OwnerGuard],
+      },
+      {
+        path: 'manager-dashboard',
+        loadChildren: () =>
+          import(
+            '../features/dashboard/manager-dashboard/manager-dashboard.module'
+          ).then((m) => m.ManagerDashboardModule),
+        canActivate: [ManagerGuard],
       },
     ],
   },

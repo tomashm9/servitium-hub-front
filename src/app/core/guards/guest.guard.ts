@@ -13,7 +13,7 @@ export class GuestGuard implements CanActivate {
 
   canActivate(): boolean {
     if (this._authService.currentUser) {
-      this._router.navigate(['/']).then();
+      this._router.navigate(['/access-denied']).then();
 
       return false;
     }

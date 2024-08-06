@@ -6,7 +6,7 @@ import { CanActivate, Router } from '@angular/router';
 @Injectable({
   providedIn: 'root',
 })
-export class AdvertiserGuard implements CanActivate {
+export class ManagerGuard implements CanActivate {
   private readonly _authService: AuthService = inject(AuthService);
   private readonly _router: Router = inject(Router);
 
@@ -15,7 +15,7 @@ export class AdvertiserGuard implements CanActivate {
       return true;
     }
 
-    this._router.navigate(['/']).then();
+    this._router.navigate(['/access-denied']).then();
 
     return false;
   }

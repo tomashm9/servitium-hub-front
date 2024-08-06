@@ -11,7 +11,9 @@
           <div class="ts-logo align-center">
             <a id="menuTitle" [routerLink]="ESSENTIAL_ROUTES.home.url">{{ ESSENTIAL_ROUTES.home.label }}</a>
           </div>
-          <app-nav-search-bar></app-nav-search-bar>
+          <ng-container *ngIf="showSearchBar">
+            <app-nav-search-bar></app-nav-search-bar>
+          </ng-container>
           <div class="ts-center-menu align-center justify-center">
             <ul class="menu-list">
               <li *ngFor="let item of centerMenuItems | async">

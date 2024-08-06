@@ -1,62 +1,38 @@
-import { Component, effect, signal } from '@angular/core';
+// src/app/features/auth/pages/client-register/client-register.component.ts
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from '../../../../core/services/auth.service';
+import { NotificationService } from '../../../../core/services/notification.service';
 import { FORMS } from '../../forms/register.form';
 import { GENDERS } from '../../../../core/enums/gender';
-import { AuthService } from '../../../../core/services/auth.service';
-import { Router } from '@angular/router';
-import { NotificationService } from '../../../../core/services/notification.service';
-
-export type UserType = 'clients' | 'owners' | 'managers';
-
-export interface IUserTypeDetails {
-  type: UserType;
-  message: string;
-  form: any;
-}
-
-const MESSAGES = {
-  clients: 'Client successfully registered',
-  owners: 'Owner successfully registered',
-  managers: 'Manager successfully registered',
-};
+import { UserType } from '../../models/user-type';
 
 @Component({
   selector: 'app-client-register',
   templateUrl: './client-register.component.html',
-  styleUrl: './client-register.component.scss',
+  styleUrls: ['./client-register.component.scss'],
 })
-export class ClientRegisterComponent {
-  form: FormGroup;
-  userType = signal<UserType>('clients');
-  userTypeDetails: IUserTypeDetails;
+export class ClientRegisterComponent implements OnInit {
+  form!: FormGroup;
+  readonly genders = GENDERS;
 
-  protected genders = GENDERS;
+  private readonly successMessage = 'Client successfully registered';
+  private readonly userType: UserType = 'clients';
 
   constructor(
-    private readonly _builder: FormBuilder,
-    private readonly _authService: AuthService,
-    private readonly _routerService: Router,
-    private readonly _notificationService: NotificationService,
-  ) {
-    this.userTypeDetails = {
-      type: this.userType(),
-      message: MESSAGES[this.userType()],
-      form: FORMS[this.userType()],
-    };
+    private readonly fb: FormBuilder,
+    private readonly authService: AuthService,
+    private readonly router: Router,
+    private readonly notificationService: NotificationService,
+  ) {}
 
-    this.form = this._builder.group(this.userTypeDetails.form);
+  ngOnInit() {
+    this.initForm();
+  }
 
-    effect(() => {
-      const type = this.userType();
-
-      this.userTypeDetails = {
-        type,
-        message: MESSAGES[type],
-        form: FORMS[type],
-      };
-
-      this.form = this._builder.group(this.userTypeDetails.form);
-    });
+  private initForm() {
+    this.form = this.fb.group(FORMS[this.userType]);
   }
 
   onSubmit() {
@@ -65,22 +41,25 @@ export class ClientRegisterComponent {
       return;
     }
 
-    this._authService
-      .registerUser(this.form.value, this.userTypeDetails.type)
-      .subscribe({
-        next: (_) => {
-          this._routerService.navigate(['/']).then();
-          this._notificationService.showSuccess(
-            'Welcome',
-            'Signed up successfully',
-          );
-        },
-        error: (err) => {
-          this._notificationService.showError(
-            'Error signing up',
-            JSON.stringify(err.error),
-          );
-        },
-      });
+    this.authService.registerUser(this.form.value, this.userType).subscribe({
+      next: () => {
+        this.router.navigate(['/client-dashboard']).then((success) => {
+          if (success) {
+            this.notificationService.showSuccess(
+              'Welcome',
+              this.successMessage,
+            );
+          } else {
+            console.error('Navigation to client-dashboard failed.');
+          }
+        });
+      },
+      error: (err) => {
+        this.notificationService.showError(
+          'Error signing up',
+          `Error: ${err.error.message || 'Unknown error'}`,
+        );
+      },
+    });
   }
 }
