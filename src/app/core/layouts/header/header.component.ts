@@ -57,12 +57,7 @@ export class HeaderComponent {
           routerLink: '/auth/signup/clients',
           visible: !isLoggedIn,
         },
-        {
-          label: 'Log Out',
-          command: () => this.handleLogout(),
-          visible: isLoggedIn,
-        },
-      ].filter((item) => item.visible !== false);
+      ].filter((item) => item.visible);
     }),
   );
 
@@ -91,7 +86,6 @@ export class HeaderComponent {
 
   handleLogout() {
     this.authService.logout();
-
     this.notificationService.showSuccess('Successfully', 'Logged out!');
   }
 }
