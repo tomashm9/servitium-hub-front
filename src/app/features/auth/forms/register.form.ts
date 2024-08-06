@@ -11,7 +11,11 @@ export interface IRegisterForm {
   birthDate: string;
 }
 
-const REGISTER_FORM = {
+export interface IRegisterOwnerForm extends IRegisterForm {}
+
+export interface IRegisterManagerForm extends IRegisterForm {}
+
+const CLIENT_REGISTER_FORM = {
   email: ['', [Validators.required, Validators.email]],
   password: ['', [Validators.required]],
   firstName: ['', [Validators.required]],
@@ -22,7 +26,16 @@ const REGISTER_FORM = {
   birthDate: ['', [Validators.required]],
 };
 
+const OWNER_REGISTER_FORM = {
+  ...CLIENT_REGISTER_FORM,
+};
+
+const MANAGER_REGISTER_FORM = {
+  ...CLIENT_REGISTER_FORM,
+};
+
 export const FORMS = {
-  clients: REGISTER_FORM,
-  owners: REGISTER_FORM,
+  clients: CLIENT_REGISTER_FORM,
+  owners: OWNER_REGISTER_FORM,
+  managers: MANAGER_REGISTER_FORM,
 };

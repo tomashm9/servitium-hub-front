@@ -1,0 +1,19 @@
+.example-container {
+  height: 100%;
+}
+
+.example-sidenav {
+  width: 250px;
+}
+
+.example-content {
+  padding: 16px;
+}
+
+mat-toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+}

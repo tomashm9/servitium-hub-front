@@ -3,5 +3,7 @@ export const API_ENDPOINTS = {
   register: {
     clients: '/auth/signup/clients',
     owners: '/auth/signup/owners',
+    managers: '/auth/signup/managers',
   },
+  inviteManager: '/auth/invite/manager',
 };

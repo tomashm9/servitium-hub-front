@@ -1,11 +1,12 @@
 import { Component, effect, signal } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { FORMS } from '../../forms/register.form';
+import { GENDERS } from '../../../../core/enums/gender';
 import { AuthService } from '../../../../core/services/auth.service';
 import { Router } from '@angular/router';
 import { NotificationService } from '../../../../core/services/notification.service';
 
-export type UserType = 'clients' | 'owners';
+export type UserType = 'clients' | 'owners' | 'managers';
 
 export interface IUserTypeDetails {
   type: UserType;
@@ -14,25 +15,22 @@ export interface IUserTypeDetails {
 }
 
 const MESSAGES = {
-  clients: 'auth.signup.client.message',
-  owners: 'auth.signup.owner.message',
+  clients: 'Client successfully registered',
+  owners: 'Owner successfully registered',
+  managers: 'Manager successfully registered',
 };
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrl: './register.component.scss',
+  selector: 'app-client-register',
+  templateUrl: './client-register.component.html',
+  styleUrl: './client-register.component.scss',
 })
-export class RegisterComponent {
-  protected form: FormGroup;
+export class ClientRegisterComponent {
+  form: FormGroup;
+  userType = signal<UserType>('clients');
+  userTypeDetails: IUserTypeDetails;
 
-  protected userType = signal<UserType>('clients');
-
-  protected userTypeDetails: IUserTypeDetails = {
-    type: this.userType(),
-    message: MESSAGES[this.userType()],
-    form: FORMS[this.userType()],
-  };
+  protected genders = GENDERS;
 
   constructor(
     private readonly _builder: FormBuilder,
@@ -40,6 +38,12 @@ export class RegisterComponent {
     private readonly _routerService: Router,
     private readonly _notificationService: NotificationService,
   ) {
+    this.userTypeDetails = {
+      type: this.userType(),
+      message: MESSAGES[this.userType()],
+      form: FORMS[this.userType()],
+    };
+
     this.form = this._builder.group(this.userTypeDetails.form);
 
     effect(() => {
@@ -58,7 +62,6 @@ export class RegisterComponent {
   onSubmit() {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
-
       return;
     }
 
@@ -67,15 +70,14 @@ export class RegisterComponent {
       .subscribe({
         next: (_) => {
           this._routerService.navigate(['/']).then();
-
           this._notificationService.showSuccess(
-            'auth.register.success.summary',
-            'auth.register.success.detail',
+            'Welcome',
+            'Signed up successfully',
           );
         },
         error: (err) => {
           this._notificationService.showError(
-            'auth.register.error.summary',
+            'Error signing up',
             JSON.stringify(err.error),
           );
         },

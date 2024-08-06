@@ -5,8 +5,12 @@ import { CookieService } from './cookie.service';
 import { IAuth } from '../../features/auth/models/auth.model';
 import { ILoginForm } from '../../features/auth/forms/login.form';
 import { API_ENDPOINTS } from '../constants/api-endpoints';
-import { IRegisterForm } from '../../features/auth/forms/register.form';
-import { UserType } from '../../features/auth/pages/register/register.component';
+import {
+  IRegisterForm,
+  IRegisterManagerForm,
+  IRegisterOwnerForm,
+} from '../../features/auth/forms/register.form';
+import { UserType } from '../../features/auth/pages/client-register/client-register.component';
 import { COMMON } from '../constants/common';
 import { ROLES } from '../constants/roles';
 
@@ -94,10 +98,19 @@ export class AuthService {
       .pipe(tap((auth) => (this.currentUser = auth)));
   }
 
-  registerUser(form: IRegisterForm, userType: UserType) {
+  registerUser(
+    form: IRegisterForm | IRegisterOwnerForm | IRegisterManagerForm,
+    userType: UserType,
+  ) {
     return this._httpClient
       .post<IAuth>(`${API_ENDPOINTS.register[userType]}`, form)
       .pipe(tap((auth) => (this.currentUser = auth)));
+  }
+
+  inviteManager(email: string) {
+    return this._httpClient.post<void>(`${API_ENDPOINTS.inviteManager}`, {
+      email,
+    });
   }
 
   logout() {

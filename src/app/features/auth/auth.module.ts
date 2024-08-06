@@ -11,10 +11,17 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 
 import { LoginComponent } from './pages/login/login.component';
-import { RegisterComponent } from './pages/register/register.component';
+import { ClientRegisterComponent } from './pages/client-register/client-register.component';
+import { InviteManagerComponent } from './pages/invite-manager/invite-manager.component';
+import { OwnerRegisterComponent } from './pages/owner-register/owner-register.component';
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent],
+  declarations: [
+    LoginComponent,
+    ClientRegisterComponent,
+    InviteManagerComponent,
+    OwnerRegisterComponent,
+  ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
