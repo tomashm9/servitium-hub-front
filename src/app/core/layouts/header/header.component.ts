@@ -2,7 +2,6 @@ import { Component, computed, inject } from '@angular/core';
 import { ESSENTIAL_ROUTES } from '../../constants/routes';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { NotificationService } from '../../services/notification.service';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { SidenavService } from '../../services/sidenav.service';
 
@@ -13,7 +12,6 @@ import { SidenavService } from '../../services/sidenav.service';
 })
 export class HeaderComponent {
   private readonly authService = inject(AuthService);
-  private readonly notificationService = inject(NotificationService);
   protected readonly ESSENTIAL_ROUTES = ESSENTIAL_ROUTES;
 
   isLoggedIn = toSignal(this.authService.isLoggedIn$);
@@ -82,10 +80,5 @@ export class HeaderComponent {
 
   toggleSidenav() {
     this.sidenavService.toggleSidenav();
-  }
-
-  handleLogout() {
-    this.authService.logout();
-    this.notificationService.showSuccess('Successfully', 'Logged out!');
   }
 }

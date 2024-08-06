@@ -22,7 +22,6 @@
           <div class="ts-right-menu align-center justify-end">
             <ng-container *ngFor="let item of rightMenuItems | async">
               <a *ngIf="item.routerLink" mat-button [routerLink]="item.routerLink">{{ item.label }}</a>
-              <button *ngIf="item.command" mat-button (click)="item.command()">{{ item.label }}</button>
             </ng-container>
           </div>
         </mat-toolbar>
