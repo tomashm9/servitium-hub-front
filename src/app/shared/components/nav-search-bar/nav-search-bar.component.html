@@ -1,0 +1,29 @@
+<form (ngSubmit)="onSearch()" class="nav-search-form">
+  <mat-form-field appearance="fill" class="search-location">
+    <input
+      matInput
+      [(ngModel)]="locationQuery"
+      placeholder="Country, City, Postal Code"
+      name="locationQuery"
+      aria-label="Location Search"
+    />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="service-type">
+    <mat-label>Service Type</mat-label>
+    <mat-select [(ngModel)]="selectedServiceType" (selectionChange)="onServiceTypeChange($event.value)">
+      <mat-option value="">All</mat-option>
+      <mat-option *ngFor="let type of serviceTypes" [value]="type">{{ type }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="sub-service-type" *ngIf="subServiceTypes.length">
+    <mat-label>Sub-Service Type</mat-label>
+    <mat-select [(ngModel)]="selectedSubServiceType">
+      <mat-option value="">All</mat-option>
+      <mat-option *ngFor="let subType of subServiceTypes" [value]="subType">{{ subType }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit">Search</button>
+</form>
