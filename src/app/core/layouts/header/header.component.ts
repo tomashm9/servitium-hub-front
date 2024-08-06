@@ -1,6 +1,6 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, computed, inject, OnInit } from '@angular/core';
 import { ESSENTIAL_ROUTES } from '../../constants/routes';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { SidenavService } from '../../services/sidenav.service';
@@ -10,9 +10,10 @@ import { SidenavService } from '../../services/sidenav.service';
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   private readonly authService = inject(AuthService);
   protected readonly ESSENTIAL_ROUTES = ESSENTIAL_ROUTES;
+  private _showSearchBar: boolean = false;
 
   isLoggedIn = toSignal(this.authService.isLoggedIn$);
 
@@ -63,6 +64,18 @@ export class HeaderComponent {
     private router: Router,
     private sidenavService: SidenavService,
   ) {}
+
+  ngOnInit() {
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this._showSearchBar = this.router.url.includes('/client-dashboard');
+      }
+    });
+  }
+
+  get showSearchBar(): boolean {
+    return this._showSearchBar;
+  }
 
   scrollTo(section: string): void {
     const element = document.getElementById(section);

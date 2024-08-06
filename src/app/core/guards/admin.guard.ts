@@ -15,7 +15,7 @@ export class AdminGuard implements CanActivate {
       return true;
     }
 
-    this._router.navigate(['/']).then();
+    this._router.navigate(['/access-denied']).then();
 
     return false;
   }

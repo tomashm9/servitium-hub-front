@@ -1,7 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { AuthService } from '../../../../core/services/auth.service';
 import { NotificationService } from '../../../../core/services/notification.service';
-import { Router } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { LOGIN_FORM } from '../../forms/login.form';
 
@@ -13,7 +12,6 @@ import { LOGIN_FORM } from '../../forms/login.form';
 export class LoginComponent {
   private readonly authService = inject(AuthService);
   private readonly notificationService = inject(NotificationService);
-  private readonly router = inject(Router);
   form: FormGroup;
 
   constructor(builder: FormBuilder) {
@@ -23,7 +21,6 @@ export class LoginComponent {
   onSubmit() {
     this.authService.login(this.form.value).subscribe({
       next: (_) => {
-        this.router.navigate(['/']).then();
         this.notificationService.showSuccess('Successfully', 'Logged in');
       },
       error: (err) => {
