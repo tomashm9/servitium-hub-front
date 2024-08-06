@@ -1,0 +1,18 @@
+<div class="invite-container">
+  <mat-card class="invite-card">
+    <mat-card-header>
+      <mat-card-title>Invite Manager</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="onInvite()">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" formControlName="email" required>
+        </mat-form-field>
+        <div class="actions">
+          <button mat-raised-button color="primary" type="submit">Invite</button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
