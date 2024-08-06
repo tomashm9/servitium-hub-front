@@ -15,7 +15,7 @@ export class NotificationService {
     summary: string,
     detail: string,
     severity: Severity,
-    duration: number = 3000,
+    duration: number = 2000,
   ) {
     const translatedSummary = this.translateService.instant(summary);
     const translatedDetail = this.translateService.instant(detail);

@@ -1,5 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
+import { ESSENTIAL_ROUTES } from '../../constants/routes';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
+import { NotificationService } from '../../services/notification.service';
+import { toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { SidenavService } from '../../services/sidenav.service';
 
 @Component({
   selector: 'app-header',
@@ -7,40 +12,64 @@ import { Router } from '@angular/router';
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
-  logoItem = {
-    home: {
-      url: '/',
-      label: 'Servitium Hub',
-    },
-  };
+  private readonly authService = inject(AuthService);
+  private readonly notificationService = inject(NotificationService);
+  protected readonly ESSENTIAL_ROUTES = ESSENTIAL_ROUTES;
 
-  centerMenuItems = [
-    {
-      label: 'Home',
-      routerLink: 'hero',
-    },
-    {
-      label: 'About Us',
-      routerLink: 'about-us',
-    },
-    {
-      label: 'Services',
-      routerLink: 'services',
-    },
-  ];
+  isLoggedIn = toSignal(this.authService.isLoggedIn$);
 
-  rightMenuItems = [
-    {
-      label: 'Log In',
-      routerLink: 'auth/login',
-    },
-    {
-      label: 'Sign Up',
-      routerLink: 'auth/signup',
-    },
-  ];
+  centerMenuItems = toObservable(
+    computed(() => {
+      const isLoggedIn = this.isLoggedIn();
 
-  constructor(private router: Router) {}
+      return [
+        {
+          label: 'Home',
+          routerLink: 'hero',
+          visible: !isLoggedIn,
+        },
+        {
+          label: 'About Us',
+          routerLink: 'about-us',
+          visible: !isLoggedIn,
+        },
+        {
+          label: 'Services',
+          routerLink: 'services',
+          visible: !isLoggedIn,
+        },
+      ].filter((item) => item.visible);
+    }),
+  );
+
+  rightMenuItems = toObservable(
+    computed(() => {
+      const isLoggedIn = this.isLoggedIn();
+
+      return [
+        {
+          label: 'Log In',
+          routerLink: '/auth/login',
+          visible: !isLoggedIn,
+        },
+        {
+          label: 'Sign Up',
+          routerLink: '/auth/signup/clients',
+          visible: !isLoggedIn,
+        },
+        {
+          label: 'Log Out',
+          command: () => this.handleLogout(),
+          visible: isLoggedIn,
+        },
+      ].filter((item) => item.visible !== false);
+    }),
+  );
+
+  constructor(
+    private router: Router,
+    private sidenavService: SidenavService,
+  ) {}
 
   scrollTo(section: string): void {
     const element = document.getElementById(section);
@@ -54,5 +83,15 @@ export class HeaderComponent {
         }
       });
     }
+  }
+
+  toggleSidenav() {
+    this.sidenavService.toggleSidenav();
+  }
+
+  handleLogout() {
+    this.authService.logout();
+
+    this.notificationService.showSuccess('Successfully', 'Logged out!');
   }
 }
