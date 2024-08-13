@@ -16,7 +16,7 @@ import { UserType } from '../../models/user-type';
 @Component({
   selector: 'app-owner-register',
   templateUrl: './owner-register.component.html',
-  styleUrls: ['./owner-register.component.scss'],
+  styleUrl: './owner-register.component.scss',
 })
 export class OwnerRegisterComponent implements OnInit {
   form!: FormGroup;

@@ -1,20 +1,20 @@
 <mat-sidenav-container class="example-container">
-  <mat-sidenav #sidenav class="example-sidenav" mode="over">
-    <mat-nav-list>
-      <ng-container *ngIf="(isLoggedIn$ | async); else loggedOut">
-        <a mat-list-item (click)="logout()">Log out</a>
-      </ng-container>
-      <ng-template #loggedOut>
-        <a mat-list-item [routerLink]="'/auth/signup/clients'">Sign up</a>
-        <a mat-list-item [routerLink]="'/auth/login'">Log in</a>
-        <a mat-list-item [routerLink]="'/auth/signup/owners'">Create a professional account</a>
-      </ng-template>
-    </mat-nav-list>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <app-header></app-header>
-    <div id="wrapper">
-      <router-outlet></router-outlet>
-    </div>
-  </mat-sidenav-content>
+    <mat-sidenav #sidenav class="example-sidenav" mode="over">
+        <mat-nav-list>
+            <ng-container *ngIf="(isLoggedIn$ | async); else loggedOut">
+                <a mat-list-item (click)="logout()">Log out</a>
+            </ng-container>
+            <ng-template #loggedOut>
+                <a mat-list-item [routerLink]="'/auth/signup/clients'" (click)="closeSidenav()">Sign up</a>
+                <a mat-list-item [routerLink]="'/auth/login'" (click)="closeSidenav()">Log in</a>
+                <a mat-list-item [routerLink]="'/auth/signup/owners'" (click)="closeSidenav()">Create a professional account</a>
+            </ng-template>
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <app-header></app-header>
+        <div id="wrapper">
+            <router-outlet></router-outlet>
+        </div>
+    </mat-sidenav-content>
 </mat-sidenav-container>

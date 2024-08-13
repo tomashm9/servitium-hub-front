@@ -6,7 +6,7 @@ import { NotificationService } from '../../../../core/services/notification.serv
 @Component({
   selector: 'app-invite-manager',
   templateUrl: './invite-manager.component.html',
-  styleUrls: ['./invite-manager.component.scss'],
+  styleUrl: './invite-manager.component.scss',
 })
 export class InviteManagerComponent {
   form: FormGroup;
