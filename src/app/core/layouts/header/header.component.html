@@ -9,21 +9,23 @@
             </button>
           </div>
           <div class="ts-logo align-center">
-            <a id="menuTitle" [routerLink]="ESSENTIAL_ROUTES.home.url">{{ ESSENTIAL_ROUTES.home.label }}</a>
+            <a id="menuTitle" [routerLink]="logoRouterLink">{{ isLoggedIn() ? 'Servitium Hub' : 'Servitium Hub' }}</a>
           </div>
           <ng-container *ngIf="showSearchBar">
-            <app-nav-search-bar></app-nav-search-bar>
           </ng-container>
-          <div class="ts-center-menu align-center justify-center">
+          <button mat-icon-button class="mobile-menu-icon" (click)="toggleMobileMenu()">
+            <mat-icon>menu</mat-icon>
+          </button>
+          <div class="ts-center-menu align-center" [ngClass]="{'mobile-menu-open': mobileMenuOpen}">
             <ul class="menu-list">
               <li *ngFor="let item of centerMenuItems | async">
                 <a mat-button (click)="scrollTo(item.routerLink)">{{ item.label }}</a>
               </li>
             </ul>
           </div>
-          <div class="ts-right-menu align-center justify-end">
+          <div class="ts-right-menu" [ngClass]="{'mobile-menu-open': mobileMenuOpen}">
             <ng-container *ngFor="let item of rightMenuItems | async">
-              <a *ngIf="item.routerLink" mat-button [routerLink]="item.routerLink">{{ item.label }}</a>
+              <a mat-button [routerLink]="item.routerLink">{{ item.label }}</a>
             </ng-container>
           </div>
         </mat-toolbar>

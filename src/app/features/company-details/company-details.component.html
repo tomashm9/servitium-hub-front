@@ -1,0 +1,45 @@
+<div class="page-container">
+  <div class="company-gallery" *ngIf="company.images && company.images.length">
+    <div class="main-image">
+      <img [src]="company.images[1].imageUrl" alt="Main Image">
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item" *ngFor="let image of company.images.slice(2)">
+        <img [src]="image.imageUrl" alt="Company Image">
+      </div>
+    </div>
+  </div>
+
+  <div class="company-header">
+    <h1>{{ company.name }}</h1>
+    <button (click)="bookNow()">Book Now</button>
+  </div>
+
+  <div class="company-details">
+    <div class="company-info" *ngIf="location">
+      <h2>Location</h2>
+      <p>{{ location.addressLine1 }}</p>
+      <p *ngIf="location.addressLine2">{{ location.addressLine2 }}</p>
+      <p>
+        {{ location.city?.name }},
+        {{ location.country?.name }}
+        {{ location.postalCode?.code1 }}
+      </p>
+    </div>
+
+    <div class="opening-hours">
+      <h2>Opening Hours</h2>
+      <ul>
+        <li *ngFor="let hours of openingHours">
+          <strong>{{ hours.dayOfWeek }}:</strong>
+          <span *ngIf="hours.startTime && hours.endTime">
+            {{ hours.startTime }} - {{ hours.endTime }}
+          </span>
+          <span *ngIf="!hours.startTime && !hours.endTime">
+            Closed
+          </span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

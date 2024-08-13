@@ -8,26 +8,31 @@ import { Router } from '@angular/router';
 })
 export class SearchBarComponent {
   searchQuery: string = '';
+  errorMessage: string | null = null;
 
   constructor(private router: Router) {}
 
   onSearch(): void {
     const trimmedQuery = this.searchQuery.trim();
-    if (trimmedQuery) {
+
+    if (this.isValidLocation(trimmedQuery)) {
       this.router
         .navigate(['/client-dashboard'], {
           queryParams: { search: trimmedQuery },
         })
         .then(() => {
           this.searchQuery = '';
+          this.errorMessage = null;
         })
         .catch((error) => {
           console.error('Error during navigation:', error);
         });
     } else {
-      this.router.navigate(['/client-dashboard']).catch((error) => {
-        console.error('Error during navigation:', error);
-      });
+      this.errorMessage = 'Please enter a valid Country, City, or Postal Code.';
     }
+  }
+
+  isValidLocation(query: string): boolean {
+    return query.length > 0;
   }
 }

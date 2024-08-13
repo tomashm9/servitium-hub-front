@@ -1,5 +1,5 @@
 .header-config-1 {
-  height: auto;
+  height: 64px;
 }
 
 .header-config-2 {
@@ -15,8 +15,7 @@
   width: 100%;
   transition: all 400ms ease;
   margin: 0 auto;
-  border-bottom: 1px solid;
-  border-bottom-color: transparent;
+  border-bottom: 1px solid transparent;
   background: var(--header-bg-color);
   height: 64px;
 }
@@ -26,10 +25,8 @@ mat-toolbar {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  height: 64px;
   padding: 0 40px;
   background-color: var(--header-bg-color);
-  flex-wrap: nowrap;
 }
 
 .ts-left-menu {
@@ -84,6 +81,16 @@ mat-toolbar {
   color: inherit;
 }
 
+.mobile-menu-icon {
+  display: none;
+}
+
+.mobile-menu-open {
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+}
+
 @media (max-width: 1200px) {
   mat-toolbar {
     padding: 0 20px;
@@ -100,46 +107,86 @@ mat-toolbar {
 
 @media (max-width: 768px) {
   mat-toolbar {
-    flex-direction: column;
+    flex-direction: row;
     padding: 0 10px;
-    height: auto;
+    height: 64px;
+    justify-content: space-between;
   }
 
   .ts-left-menu {
     display: none;
   }
 
-  .ts-logo {
-    margin-bottom: 10px;
+  .mobile-menu-icon {
+    display: flex;
   }
 
   .ts-center-menu {
+    display: none;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
+    position: absolute;
+    top: 64px;
+    left: 0;
+    background-color: var(--header-bg-color);
+    z-index: 2;
+  }
+
+  .mobile-menu-open .ts-center-menu {
+    display: flex;
+  }
+
+  .ts-right-menu {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    position: absolute;
+    top: 232px;
+    left: 0;
+    background-color: var(--header-bg-color);
+    z-index: 2;
+  }
+
+  .mobile-menu-open .ts-right-menu {
+    display: flex;
   }
 
   .menu-list {
+    display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
+    padding: 0;
+    margin: 0;
   }
 
   .menu-list li {
-    margin: 0.5rem 0;
+    margin: 10px 0;
+    width: 100%;
+  }
+
+  .ts-right-menu a {
+    margin: 8px 0;
+  }
+
+  .menu-list li a {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+  }
+
+  #menuTitle {
+    font-size: 1.5rem;
   }
 }
 
 @media (max-width: 480px) {
   mat-toolbar {
     padding: 0 5px;
-    height: auto;
-  }
-
-  .ts-logo {
-    margin-bottom: 5px;
-  }
-
-  .menu-list {
-    flex-direction: column;
-    align-items: center;
+    height: 64px;
   }
 
   .menu-list li {

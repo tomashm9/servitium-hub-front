@@ -1,6 +1,11 @@
-// src/app/features/auth/pages/client-register/client-register.component.ts
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import {
+  AbstractControl,
+  AbstractControlOptions,
+  FormBuilder,
+  FormGroup,
+  ValidationErrors,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../../core/services/auth.service';
 import { NotificationService } from '../../../../core/services/notification.service';
@@ -32,7 +37,15 @@ export class ClientRegisterComponent implements OnInit {
   }
 
   private initForm() {
-    this.form = this.fb.group(FORMS[this.userType]);
+    this.form = this.fb.group(FORMS[this.userType], {
+      validators: this.passwordsMatch,
+    } as AbstractControlOptions); // Use AbstractControlOptions here
+  }
+
+  private passwordsMatch(control: AbstractControl): ValidationErrors | null {
+    const password = control.get('password')?.value;
+    const confirmPassword = control.get('confirmPassword')?.value;
+    return password === confirmPassword ? null : { passwordsMismatch: true };
   }
 
   onSubmit() {

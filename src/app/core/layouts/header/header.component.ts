@@ -1,5 +1,4 @@
 import { Component, computed, inject, OnInit } from '@angular/core';
-import { ESSENTIAL_ROUTES } from '../../constants/routes';
 import { NavigationEnd, Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
@@ -8,12 +7,12 @@ import { SidenavService } from '../../services/sidenav.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrl: './header.component.scss',
+  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
   private readonly authService = inject(AuthService);
-  protected readonly ESSENTIAL_ROUTES = ESSENTIAL_ROUTES;
   private _showSearchBar: boolean = false;
+  mobileMenuOpen = false;
 
   isLoggedIn = toSignal(this.authService.isLoggedIn$);
 
@@ -77,21 +76,51 @@ export class HeaderComponent implements OnInit {
     return this._showSearchBar;
   }
 
+  get logoRouterLink(): string {
+    return this.isLoggedIn() ? '/client-dashboard' : '/';
+  }
+
   scrollTo(section: string): void {
+    if (this.router.url !== '/') {
+      this.router.navigate(['/']).then(() => {
+        this.scrollToSection(section);
+      });
+    } else {
+      this.scrollToSection(section);
+    }
+  }
+
+  private scrollToSection(section: string): void {
+    if (section === 'hero') {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+      return;
+    }
+
     const element = document.getElementById(section);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    } else {
-      this.router.navigate(['/']).then(() => {
-        const newElement = document.getElementById(section);
-        if (newElement) {
-          newElement.scrollIntoView({ behavior: 'smooth' });
-        }
+      const yOffset = -this.getNavbarHeight();
+      const y = element.getBoundingClientRect().top + window.scrollY + yOffset;
+
+      window.scrollTo({
+        top: y,
+        behavior: 'smooth',
       });
     }
   }
 
+  private getNavbarHeight(): number {
+    const navbar = document.querySelector('mat-toolbar');
+    return navbar ? navbar.clientHeight : 0;
+  }
+
   toggleSidenav() {
     this.sidenavService.toggleSidenav();
+  }
+
+  toggleMobileMenu() {
+    this.mobileMenuOpen = !this.mobileMenuOpen;
   }
 }

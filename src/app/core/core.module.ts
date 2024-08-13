@@ -38,5 +38,6 @@ import { MatListItem, MatNavList } from '@angular/material/list';
     MatNavList,
     MatListItem,
   ],
+  exports: [FooterComponent],
 })
 export class CoreModule {}

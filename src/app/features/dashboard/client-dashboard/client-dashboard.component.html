@@ -1,0 +1,17 @@
+<div class="dashboard">
+  <div class="main-content">
+    <div class="companies" *ngIf="companies.length > 0; else noResults">
+      <mat-grid-list cols="4" rowHeight="190px">
+        <mat-grid-tile *ngFor="let company of companies" (click)="navigateToDetails(company.id)">
+          <img [src]="getImageUrl(company)" alt="{{ company.name }}" />
+          <mat-grid-tile-footer>
+            <h3>{{ company.name }}</h3>
+          </mat-grid-tile-footer>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
+  </div>
+  <ng-template #noResults>
+    <p>No companies found for the given location.</p>
+  </ng-template>
+</div>
