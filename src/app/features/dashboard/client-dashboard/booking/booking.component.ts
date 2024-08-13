@@ -12,7 +12,7 @@ import { ReservationService } from '../services/reservation.service';
 @Component({
   selector: 'app-booking',
   templateUrl: './booking.component.html',
-  styleUrls: ['./booking.component.scss'],
+  styleUrl: './booking.component.scss',
 })
 export class BookingComponent implements OnInit {
   @ViewChild('stepper') private stepper!: MatStepper;

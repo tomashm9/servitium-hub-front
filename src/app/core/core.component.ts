@@ -8,7 +8,7 @@ import { NotificationService } from './services/notification.service';
 @Component({
   selector: 'app-core',
   templateUrl: './core.component.html',
-  styleUrls: ['./core.component.scss'],
+  styleUrl: './core.component.scss',
 })
 export class CoreComponent {
   @ViewChild('sidenav') sidenav!: MatSidenav;
@@ -36,6 +36,10 @@ export class CoreComponent {
   logout() {
     this.authService.logout();
     this.notificationService.showSuccess('Successfully', 'Logged out!');
+    this.closeSidenav();
+  }
+
+  closeSidenav() {
     this.sidenav
       .close()
       .then(() => {
