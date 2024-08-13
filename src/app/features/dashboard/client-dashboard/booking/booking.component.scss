@@ -1,0 +1,169 @@
+/* General styles for the stepper component */
+mat-horizontal-stepper {
+  .mat-step-header {
+    background-color: #f5f5f5;
+  }
+
+  .mat-step-label {
+    color: #333;
+  }
+
+  .mat-step-icon {
+    color: #3f51b5;
+  }
+
+  .mat-step-icon.mat-step-icon-active {
+    color: #303f9f;
+  }
+
+  .mat-step-content {
+    padding: 20px;
+  }
+}
+
+/* General styles for step content */
+.step-content {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+/* Styles for step content left and right columns */
+.left-column,
+.right-column {
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.left-column {
+  flex: 2;
+  margin-right: 20px;
+  border-right: 1px solid #ddd;
+}
+
+.right-column {
+  flex: 1;
+}
+
+/* Date picker styles */
+.date-picker-field {
+  width: 100%;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.mat-datepicker-toggle {
+  margin-right: 8px;
+}
+
+.calendar-time-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+mat-calendar {
+  flex: 1;
+  margin-right: 20px;
+  max-width: 300px;
+}
+
+mat-calendar .mat-calendar-body-cell-content {
+  font-size: 0.85rem;
+  height: 36px;
+  width: 36px;
+  line-height: 36px;
+}
+
+mat-calendar .mat-calendar-body-selected {
+  background-color: #3f51b5;
+  color: #fff;
+}
+
+.time-selection {
+  flex: 1;
+  max-width: 300px;
+}
+
+/* General button styles */
+button {
+  margin-top: 20px;
+}
+
+.service-selection,
+.time-selection {
+  margin-bottom: 20px;
+}
+
+.mat-radio-button {
+  margin-bottom: 10px;
+}
+
+/* Specific styles for Step 3 of 3 */
+mat-step:last-child .step-content {
+  display: flex;
+  align-items: flex-start;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fafafa;
+}
+
+mat-step:last-child .left-column {
+  flex: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+mat-step:last-child .right-column {
+  flex: 1;
+  text-align: center;
+}
+
+/* Adjust styles for buttons and links in Step 3 */
+mat-step:last-child .left-column h2 {
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+mat-step:last-child .left-column p {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+mat-step:last-child .left-column button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+mat-step:last-child .right-column button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-size: 1rem;
+  background-color: #3f51b5;
+  color: #fff;
+}
+
+mat-step:last-child .right-column button:hover {
+  background-color: #303f9f;
+}
+
+mat-step:last-child .left-column a {
+  color: #3f51b5;
+  text-decoration: none;
+}
+
+mat-step:last-child .left-column a:hover {
+  text-decoration: underline;
+}

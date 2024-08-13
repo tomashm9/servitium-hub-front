@@ -3,6 +3,7 @@ import { Validators } from '@angular/forms';
 export interface IRegisterForm {
   email: string;
   password: string;
+  confirmPassword: string;
   firstName: string;
   lastName: string;
   phoneNumber: string;
@@ -18,6 +19,7 @@ export interface IRegisterManagerForm extends IRegisterForm {}
 const CLIENT_REGISTER_FORM = {
   email: ['', [Validators.required, Validators.email]],
   password: ['', [Validators.required]],
+  confirmPassword: ['', [Validators.required]],
   firstName: ['', [Validators.required]],
   lastName: ['', [Validators.required]],
   phoneNumber: ['', [Validators.required]],

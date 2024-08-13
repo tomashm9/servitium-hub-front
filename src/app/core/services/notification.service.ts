@@ -15,15 +15,19 @@ export class NotificationService {
     summary: string,
     detail: string,
     severity: Severity,
-    duration: number = 2000,
+    duration: number = 1000,
   ) {
     const translatedSummary = this.translateService.instant(summary);
     const translatedDetail = this.translateService.instant(detail);
+
     this.snackBar.open(`${translatedSummary}: ${translatedDetail}`, '', {
       duration: duration,
-      panelClass: severity,
+      panelClass: [
+        'custom-snackbar',
+        severity === 'success' ? 'snackbar-success' : 'snackbar-error',
+      ],
       horizontalPosition: 'right',
-      verticalPosition: 'top',
+      verticalPosition: 'bottom',
     });
   }
 
@@ -32,6 +36,6 @@ export class NotificationService {
   }
 
   showError(summary: string, detail: string) {
-    this.show(summary, detail, 'error', 5000);
+    this.show(summary, detail, 'error', 3000);
   }
 }

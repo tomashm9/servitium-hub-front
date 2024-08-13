@@ -10,7 +10,7 @@
         <p>Create an account for your business to reach more customers.</p>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-button>Create a professional account</button>
+        <button mat-button [routerLink]="['/auth/signup/owners']">Create a professional account</button>
       </mat-card-actions>
     </mat-card>
 
@@ -23,7 +23,7 @@
         <p>Discover and connect with local businesses in your area.</p>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-button>Search for local business</button>
+        <button mat-button [routerLink]="['/client-dashboard']">Search for local business</button>
       </mat-card-actions>
     </mat-card>
 
@@ -36,7 +36,7 @@
         <p>Get insights and reports on the performance of your business.</p>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-button>Go to Business Dashboard</button>
+        <button mat-button (click)="goToDashboard()">Go to Business Dashboard</button>
       </mat-card-actions>
     </mat-card>
   </div>

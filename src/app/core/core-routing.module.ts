@@ -42,6 +42,13 @@ const routes: Routes = [
           ).then((m) => m.ManagerDashboardModule),
         canActivate: [ManagerGuard],
       },
+      {
+        path: 'company-details',
+        loadChildren: () =>
+          import('../features/company-details/company-details.module').then(
+            (m) => m.CompanyDetailsModule,
+          ),
+      },
     ],
   },
 ];
